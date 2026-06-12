@@ -1,16 +1,16 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
 import faiss
+model=SentenceTransformer("all-MiniLM-L6-v2")
 def create_embeddings(chunks):
-    model=SentenceTransformer("all-MiniLM-L6-v2")
     embeddings=model.encode(chunks)
-    return model,embeddings 
+    return embeddings 
 def build_index(embeddings):
     embeddings=np.array(embeddings).astype("float32")
     index=faiss.IndexFlatL2(embeddings.shape[1])
     index.add(embeddings)
     return index
-def retrieve(query,model,index,chunks,k):
+def retrieve(query,index,chunks,k):
     query_embedding=model.encode([query])
     query_embedding=np.array(query_embedding).astype("float32")
     distances,indices=index.search(query_embedding,k)

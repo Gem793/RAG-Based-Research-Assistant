@@ -5,10 +5,10 @@ from llm import generate_answer
 def main():
     text=extract_text("sample.pdf")
     chunks=create_chunks(text)
-    model,embeddings=create_embeddings(chunks)
+    embeddings=create_embeddings(chunks)
     index=build_index(embeddings)
     query=input("Ask a question: ")
-    retrieved_chunks=retrieve(query,model,index,chunks,3)
+    retrieved_chunks=retrieve(query,index,chunks,6)
     retrieved_chunks=[chunks[0]]+retrieved_chunks
     answer=generate_answer(query,retrieved_chunks)
     print("\nAnswer: ")
