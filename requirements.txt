@@ -3,3 +3,5 @@ sentence_transformers
 numpy
 faiss-cpu
 langchain_text_splitters
+google-genai 
+python-dotenv

@@ -2,8 +2,8 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import faiss
 model=SentenceTransformer("all-MiniLM-L6-v2")
-def create_embeddings(chunks):
-    embeddings=model.encode(chunks)
+def create_embeddings(chunk_texts):
+    embeddings=model.encode(chunk_texts)
     return embeddings 
 def build_index(embeddings):
     embeddings=np.array(embeddings).astype("float32")
@@ -16,5 +16,10 @@ def retrieve(query,index,chunks,k):
     distances,indices=index.search(query_embedding,k)
     results=[]
     for i in indices[0]:
-        results.append(chunks[i])
+        results.append({
+            "chunk_id":chunks[i]["chunk_id"],
+            "page":chunks[i]["page"],
+            "text":chunks[i]["text"]
+            "distances":float(distances[0][rank])
+        })
     return results
