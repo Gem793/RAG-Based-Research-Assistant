@@ -49,6 +49,7 @@ chunks, index = build_pipeline()
 st.title("RAG Based Research Assistant")
 
 st.markdown("### Research Paper: Web-Based Indoor Navigation System(Accepted and presented at IEEE CSR 2026 (publication pending))")
+st.markdown("To view, please follow the link below:")
 st.markdown("https://drive.google.com/file/d/14Morr-Ly6-0HEtJ5ntQ-VxcxAaAGoT29/view?usp=sharing")
 
 # st.sidebar.title("Document Viewer")
