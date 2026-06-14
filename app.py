@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+from streamlit_pdf_viewer import pdf_viewer
 from pdf_parser import extract_text
 from chunker import create_chunks
 from retriever import create_embeddings, build_index, retrieve, rerank
@@ -19,27 +20,39 @@ def build_pipeline():
 
 
 chunks, index = build_pipeline()
-def show_pdf(file_path):
-    with open(file_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
+# def show_pdf(file_path):
+    # Renders the document directly without needing iframe tags
+#     pdf_viewer(input=file_path, height=800)
+#     pdf_display = f"""
+#     <iframe
+# #         src="data:application/pdf;base64,{pdf_viewer}"
+# #         width="100%"
+# #         height="800px"
+# #         type="application/pdf">
+# #     </iframe>
+# #     """
+# def show_pdf(file_path):
+#     with open(file_path, "rb") as f:
+#         base64_pdf = base64.b64encode(f.read()).decode("utf-8")
 
-    pdf_display = f"""
-    <iframe
-        src="data:application/pdf;base64,{base64_pdf}"
-        width="100%"
-        height="800px"
-        type="application/pdf">
-    </iframe>
-    """
-    st.sidebar.markdown(pdf_display, unsafe_allow_html=True)
+#     pdf_display = f"""
+#     <iframe
+#         src="data:application/pdf;base64,{base64_pdf}"
+#         width="100%"
+#         height="800px"
+#         type="application/pdf">
+#     </iframe>
+#     """
+    # st.sidebar.markdown(pdf_display, unsafe_allow_html=True)
 
 
 st.title("RAG Based Research Assistant")
 
 st.markdown("### Research Paper: Web-Based Indoor Navigation System(Accepted and presented at IEEE CSR 2026 (publication pending))")
+st.markdown("https://drive.google.com/file/d/14Morr-Ly6-0HEtJ5ntQ-VxcxAaAGoT29/view?usp=sharing")
 
-st.sidebar.title("Document Viewer")
-show_pdf("sample.pdf")
+# st.sidebar.title("Document Viewer")
+# show_pdf("sample.pdf")
 
 query = st.text_input("Ask a question about the document")
 if query:
