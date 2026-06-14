@@ -20,18 +20,18 @@ def build_pipeline():
 
 chunks, index = build_pipeline()
 def show_pdf(file_path):
-    from streamlit.components.v1 import html as st_html
     with open(file_path, "rb") as f:
-        pdf_bytes = f.read()
+        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
 
-    base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
-    iframe = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800px"></iframe>'
-
-    try:
-        st_html(iframe, height=800)
-    except Exception:
-        st.sidebar.error("Inline PDF blocked by browser/security policy.")
-        st.sidebar.download_button("Download PDF", pdf_bytes, file_name="document.pdf", mime="application/pdf")
+    pdf_display = f"""
+    <iframe
+        src="data:application/pdf;base64,{base64_pdf}"
+        width="100%"
+        height="800px"
+        type="application/pdf">
+    </iframe>
+    """
+    st.sidebar.markdown(pdf_display, unsafe_allow_html=True)
 
 
 st.title("RAG Based Research Assistant")
