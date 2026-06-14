@@ -33,5 +33,15 @@ Research Paper → Chunking → Embeddings → Vector Search → Relevant Sectio
 ---
 
 ## Use Case
+- Research paper analysis
+- Academic study assistant
+- Document Q&A system
+- Knowledge base chatbot
 
-- Interactive Q&A system for a research paper authored by me  
+## Run Locally
+
+```bash
+git clone https://github.com/Gem793/RAG-Based-Research-Assistant.git
+cd RAG-Based-Research-Assistant
+pip install -r requirements.txt
+streamlit run app.py
