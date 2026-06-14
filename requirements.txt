@@ -2,10 +2,10 @@ pypdf
 sentence_transformers
 numpy
 faiss-cpu
-langchain_text_splitters
+langchain-text-splitters
 google-genai 
 python-dotenv
 streamlit
-torch==2.1.0
-torchvision==0.16.0
-transformers==4.36.0
+torch
+torchvision
+transformers
